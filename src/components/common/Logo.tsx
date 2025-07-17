@@ -7,7 +7,7 @@ export default function Logo() {
       <img 
         src="/logo.png" 
         alt="MedImmo-Secret Logo" 
-        className="h-20 w-auto"
+        className="h-20 w-20"
       />
     </Link>
   );

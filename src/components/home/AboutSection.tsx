@@ -32,7 +32,7 @@ export default function AboutSection() {
           </div>
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80"
+              src="https://images.unsplash.com/photo-1589278173760-b2f426dc0903?auto=format&fit=crop&q=80"
               alt="Notre équipe"
               className="rounded-lg shadow-xl"
             />
