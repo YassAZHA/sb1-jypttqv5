@@ -16,9 +16,9 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed w-full bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm z-50">
+    <header className="fixed w-full bg-gray-900/95 backdrop-blur-sm border-b border-gray-700 shadow-sm z-50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between h-20">
           <Logo />
 
           {/* Desktop Navigation */}
@@ -27,7 +27,7 @@ export default function Header() {
               <Link
                 key={to}
                 to={to}
-                className="text-gray-800 hover:text-primary font-display text-base tracking-wide transition-colors relative group"
+                className="text-white hover:text-primary font-display text-base tracking-wide transition-colors relative group"
               >
                 {label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full" />
@@ -48,22 +48,22 @@ export default function Header() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6 text-gray-800" />
+              <X className="h-6 w-6 text-white" />
             ) : (
-              <Menu className="h-6 w-6 text-gray-800" />
+              <Menu className="h-6 w-6 text-white" />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden py-6 border-t border-gray-100">
+          <nav className="md:hidden py-6 border-t border-gray-700">
             <div className="flex flex-col space-y-6">
               {navItems.map(({ to, label }) => (
                 <Link
                   key={to}
                   to={to}
-                  className="text-gray-800 hover:text-primary font-display text-lg tracking-wide"
+                  className="text-white hover:text-primary font-display text-lg tracking-wide"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {label}
@@ -71,7 +71,7 @@ export default function Header() {
               ))}
               <Link
                 to={user ? "/admin" : "/login"}
-                className="text-gray-800 hover:text-primary font-display text-lg tracking-wide"
+                className="text-white hover:text-primary font-display text-lg tracking-wide"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {user ? "Admin" : "Connexion"}
