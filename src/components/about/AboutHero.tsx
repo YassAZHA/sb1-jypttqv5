@@ -6,7 +6,7 @@ export default function AboutHero() {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: 'url("/images/hero-about.jpg")',
+          backgroundImage: 'url("https://images.unsplash.com/photo-1624804823268-7d5454caa8c8??auto=format&fit=crop&q=80")',
         }}
       >
         <div className="absolute inset-0 bg-black/50" />

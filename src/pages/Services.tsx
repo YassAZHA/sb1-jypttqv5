@@ -15,7 +15,7 @@ export default function Services() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: 'url("/images/hero-services.jpg")',
+              backgroundImage: 'url("https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80")',
             }}
           >
             <div className="absolute inset-0 bg-black/40" />

@@ -35,7 +35,7 @@ export default function Properties() {
           <div 
             className="absolute inset-0 bg-cover bg-center opacity-50"
             style={{
-              backgroundImage: 'url("/images/hero-properties.jpg")',
+              backgroundImage: 'url("https://images.unsplash.com/photo-1557696859-ebd88b12be5e?auto=format&fit=crop&q=80")',
             }}
           />
           <div className="relative container mx-auto px-4">

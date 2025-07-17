@@ -43,7 +43,7 @@ export default function AboutHistory() {
 
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80"
+              src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80"
               alt="Notre équipe"
               className="rounded-lg shadow-xl"
             />
