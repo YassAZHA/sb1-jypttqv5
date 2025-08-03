@@ -133,7 +133,7 @@ interface PropertyFormProps {
 
 export default function PropertyForm({ property, mode = 'create' }: PropertyFormProps) {
   const navigate = useNavigate();
-  const { formData, errors, handleChange, validateForm } = usePropertyForm(property);
+  const { formData, errors, setErrors, handleChange, validateForm } = usePropertyForm(property);
   const [loading, setLoading] = React.useState(false);
   const [newFeature, setNewFeature] = useState('');
   const [customFeatures, setCustomFeatures] = useState<string[]>(
@@ -149,9 +149,45 @@ export default function PropertyForm({ property, mode = 'create' }: PropertyForm
 
     try {
       setLoading(true);
+      setErrors({});
 
+      // Utiliser les valeurs manuelles si elles existent, sinon les valeurs des menus déroulants
+      const finalCity = formData.customCity?.trim() || formData.city;
+      const finalLocation = formData.customLocation?.trim() || formData.location;
+
+      // Validation des doublons pour la saisie manuelle
+      if (formData.customCity?.trim()) {
+        const cityExists = Object.entries(cities).some(([key, { label }]) => 
+          key === formData.customCity?.trim() || label.toLowerCase() === formData.customCity?.trim().toLowerCase()
+        );
+        if (cityExists) {
+          setErrors(prev => ({
+            ...prev,
+            customCity: 'Cette ville existe déjà dans la liste. Utilisez le menu déroulant.'
+          }));
+          return;
+        }
+      }
+
+      if (formData.customLocation?.trim()) {
+        const locationExists = Object.values(cities).some(city =>
+          city.districts.some(district => 
+            district.value === formData.customLocation?.trim() || 
+            district.label.toLowerCase() === formData.customLocation?.trim().toLowerCase()
+          )
+        );
+        if (locationExists) {
+          setErrors(prev => ({
+            ...prev,
+            customLocation: 'Ce quartier existe déjà dans la liste. Utilisez le menu déroulant.'
+          }));
+          return;
+        }
+      }
       const propertyData = {
         ...formData,
+        city: finalCity,
+        location: finalLocation,
         price: parseFloat(formData.price),
         available: true
       };
@@ -170,6 +206,10 @@ export default function PropertyForm({ property, mode = 'create' }: PropertyForm
       navigate('/admin/properties');
     } catch (err) {
       console.error('Error saving property:', err);
+      setErrors(prev => ({
+        ...prev,
+        submit: 'Erreur lors de la sauvegarde. Veuillez réessayer.'
+      }));
     } finally {
       setLoading(false);
     }
@@ -359,7 +399,21 @@ export default function PropertyForm({ property, mode = 'create' }: PropertyForm
               </option>
             ))}
           </select>
+          <div className="mt-2">
+            <input
+              type="text"
+              name="customCity"
+              value={formData.customCity}
+              onChange={handleChange}
+              placeholder="Autre ville (saisie manuelle)"
+              className="w-full p-2 text-sm rounded-lg border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary text-gray-600"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Si vous saisissez une ville ici, elle remplacera la sélection ci-dessus
+            </p>
+          </div>
           {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
+          {errors.customCity && <p className="text-red-500 text-sm mt-1">{errors.customCity}</p>}
         </div>
 
         <div>
@@ -380,7 +434,21 @@ export default function PropertyForm({ property, mode = 'create' }: PropertyForm
               </option>
             ))}
           </select>
+          <div className="mt-2">
+            <input
+              type="text"
+              name="customLocation"
+              value={formData.customLocation}
+              onChange={handleChange}
+              placeholder="Autre quartier (saisie manuelle)"
+              className="w-full p-2 text-sm rounded-lg border border-gray-300 focus:border-primary focus:ring-1 focus:ring-primary text-gray-600"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Si vous saisissez un quartier ici, il remplacera la sélection ci-dessus
+            </p>
+          </div>
           {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location}</p>}
+          {errors.customLocation && <p className="text-red-500 text-sm mt-1">{errors.customLocation}</p>}
         </div>
       </div>
 

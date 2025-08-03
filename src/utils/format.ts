@@ -50,8 +50,13 @@ export function formatLocation(city?: string, district?: string): string {
     }
   };
 
-  const formattedCity = city ? cityMap[city] || city : '';
-  const formattedDistrict = city && district ? districtMap[city]?.[district] || district : '';
+  // Si la ville n'est pas dans le mapping, l'afficher telle quelle (saisie manuelle)
+  const formattedCity = city ? (cityMap[city] || city) : '';
+  
+  // Si le quartier n'est pas dans le mapping, l'afficher tel quel (saisie manuelle)
+  const formattedDistrict = district ? (
+    city && districtMap[city]?.[district] ? districtMap[city][district] : district
+  ) : '';
 
   if (formattedCity && formattedDistrict) {
     return `${formattedCity} - ${formattedDistrict}`;

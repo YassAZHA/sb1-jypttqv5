@@ -4,6 +4,8 @@ export interface PropertyFormData {
   description: string;
   city: string;
   location: string;
+  customCity: string;
+  customLocation: string;
   address: string;
   features: string[];
   images: string[];
@@ -19,6 +21,8 @@ export interface PropertyFormErrors {
   description?: string;
   city?: string;
   location?: string;
+  customCity?: string;
+  customLocation?: string;
   address?: string;
   features?: string;
   images?: string;

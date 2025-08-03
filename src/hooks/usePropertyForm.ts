@@ -9,6 +9,8 @@ const initialFormData: PropertyFormData = {
   description: '',
   city: '',
   location: '',
+  customCity: '',
+  customLocation: '',
   adress: '',
   features: [],
   images: [],
@@ -26,6 +28,8 @@ export function usePropertyForm(property?: Property) {
       description: property.description,
       city: property.city || '',
       location: property.location,
+      customCity: '',
+      customLocation: '',
       adress: property.address || '',
       price: property.price.toString(),
       images: property.images,
@@ -88,6 +92,7 @@ export function usePropertyForm(property?: Property) {
   return {
     formData,
     errors,
+    setErrors,
     handleChange,
     validateForm
   };
